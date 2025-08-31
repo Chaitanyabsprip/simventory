@@ -1,0 +1,18 @@
+---
+import ItemSummaryCard from "./ItemSummaryCard.astro";
+---
+
+<div x-data>
+  <template x-for="task in $store.tasks.getTasks()">
+    <div
+      class="p-8 shadow-lg m-4 rounded-lg bg-gray-50 max-w-sm overflow-ellipsis"
+    >
+      <p x-text="task.name" class="text-lg font-bold"></p>
+      <div class="flex flex-row gap-2 py-4">
+        <template x-for="(qty, itemId) in task.requirements">
+          <ItemSummaryCard class="bg-gray-100 px-2 py-1" />
+        </template>
+      </div>
+    </div>
+  </template>
+</div>
