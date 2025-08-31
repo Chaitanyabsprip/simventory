@@ -50,7 +50,7 @@ const items: Item[] = itemCollections.map((item) => item.data);
       <template x-if="!$store.createTask.hasRequirements()">
         <p class="text-gray-500">No items selected</p>
       </template>
-      <div class="grid grid-cols-4">
+      <div class="grid grid-cols-10 gap-4">
         <template
           id="selected-items-grid"
           x-for="(qty, itemId) in $store.createTask.requirements"
