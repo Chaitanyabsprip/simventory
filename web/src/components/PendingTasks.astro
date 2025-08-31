@@ -1,17 +1,43 @@
 ---
 import ItemSummaryCard from "./ItemSummaryCard.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<div x-data>
-  <template x-for="task in $store.tasks.getTasks()">
-    <div
-      class="p-8 shadow-lg m-4 rounded-lg bg-gray-50 max-w-sm overflow-ellipsis"
-    >
-      <p x-text="task.name" class="text-lg font-bold"></p>
-      <div class="flex flex-row gap-2 py-4">
+<div
+  x-data="{tasks: []}"
+  x-init="tasks = $store.tasks.getTasks()"
+  class="container rounded-2xl
+  mt-8
+  overflow-x-auto
+  p-4 bg-gray-100
+  flex flex-row flex-nowrap
+  shadow-inner"
+  x-show="tasks.length > 0"
+>
+  <template x-for="task in tasks">
+    <div class="p-8 shadow-lg m-4 rounded-lg bg-gray-50 max-w-full">
+      <p x-text="task.name" class="text-lg font-bold pb-2"></p>
+      <div
+        class="flex flex-row flex-nowrap text-ellipsis w-[200px] min-w-[200px] max-w-[200px]
+          gap-2 bg-gray-200 rounded-lg p-3 relative overflow-x-auto"
+      >
         <template x-for="(qty, itemId) in task.requirements">
-          <ItemSummaryCard class="bg-gray-100 px-2 py-1" />
+          <ItemSummaryCard class="shrink-0 bg-gray-100 px-2 py-1 rounded-md" />
         </template>
+      </div>
+      <div class="mt-8 flex flex-row gap-4">
+        <button
+          class="py-2 px-8 rounded-lg border-1 border-gray-300"
+          @click="handleView(task)"
+        >
+          View
+        </button>
+        <button
+          class="py-2 px-8 rounded-lg border-1 border-gray-300"
+          @click="$store.tasks.removeTask(task.id); tasks = $store.tasks.getTasks()"
+        >
+          <Icon name="mdi:trashcan" class="inline-block w-5 h-5" />
+        </button>
       </div>
     </div>
   </template>

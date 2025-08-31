@@ -2,6 +2,10 @@ import { z } from "zod";
 
 const TASKS_STORAGE_KEY = "simventory_tasks";
 
+function generateTaskId(): string {
+  return crypto.randomUUID();
+}
+
 export const ItemsSchema = z.object({
   name: z.string(),
   id: z.string(),
@@ -80,6 +84,12 @@ export interface TaskStore {
 export default {
   addTask(task: Task) {
     const tasks = this.getTasks();
+    if (!task.id) {
+      task.id = generateTaskId();
+    }
+    if (!task.status) {
+      task.status = "todo";
+    }
     tasks.push(task);
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
   },

@@ -1,5 +1,4 @@
 import { z } from "zod";
-const TASKS_STORAGE_KEY = "simventory_tasks";
 
 export const ItemsSchema = z.object({
   name: z.string(),
@@ -106,25 +105,4 @@ export function formatBuildTime(seconds: number): string {
 export function totalItemsRequired(tasks: Task[]): Record<string, number> {
   const total: Record<string, number> = {};
   return total;
-}
-
-export function addTask(task: Task) {
-  const tasks = getTasks();
-  tasks.push(task);
-  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-}
-
-export function removeTask(taskId: string) {
-  const tasks = getTasks().filter((t) => t.id !== taskId);
-  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-}
-
-export function updateTask(task: Task) {
-  const tasks = getTasks().map((t) => (t.id === task.id ? task : t));
-  localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
-}
-
-export function getTasks(): Task[] {
-  const tasks = localStorage.getItem(TASKS_STORAGE_KEY);
-  return tasks ? JSON.parse(tasks) : [];
 }

@@ -24,3 +24,5 @@ pnpm-debug.log*
 .idea/
 
 bun.lockb
+scripts/simcity_item_icons
+scripts/uv.lock

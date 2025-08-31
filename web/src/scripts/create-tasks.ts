@@ -50,6 +50,7 @@ export default {
     const task = {
       name: this.name,
       requirements: this.requirements,
+      status: "todo" as const,
     } as Task;
     taskStore.addTask(task);
     this.name = "";

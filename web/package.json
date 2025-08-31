@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.8",
+    "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.1.12",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.14.9",

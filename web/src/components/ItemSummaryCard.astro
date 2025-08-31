@@ -1,9 +1,15 @@
 ---
-
+import { Icon } from "astro-icon/components";
+const props = Astro.props;
+if (props.class) {
+  props.class = props.class + " flex flex-row items-center gap-2";
+} else {
+  props.class = "flex flex-row items-center gap-2";
+}
 ---
 
 <div x-show="qty > 0" {...Astro.props}>
-  <span x-text="itemId"></span>
+  <img :src="`src/assets/icons/${itemId}.svg`" height="36" width="36" />
   <span>&nbsp;x&nbsp;</span>
-  <span x-text="qty"></span>
+  <span class="text-md" x-text="qty"></span>
 </div>
